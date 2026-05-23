@@ -1,38 +1,37 @@
 from pathlib import Path
 
+from hermes_cli.plugins import PluginContext, PluginManager, PluginManifest
+
 from plugin.skill_factory_v1 import register
 
 
-class DummyCtx:
-    def __init__(self):
-        self.skills = []
-        self.hooks = []
-        self.commands = []
-        self.cli_commands = []
-
-    def register_skill(self, **kwargs):
-        self.skills.append(kwargs)
-
-    def register_hook(self, name, handler):
-        self.hooks.append((name, handler))
-
-    def register_command(self, **kwargs):
-        self.commands.append(kwargs)
-
-    def register_cli_command(self, **kwargs):
-        self.cli_commands.append(kwargs)
+class DummyCtx(PluginContext):
+    def __init__(self, base_dir: Path):
+        manager = PluginManager()
+        manifest = PluginManifest(
+            name="skill_factory_v1",
+            version="0.1.0",
+            description="description",
+            author="Hermes Agent",
+            source="user",
+            path=str(base_dir),
+            kind="standalone",
+            key="skill_factory_v1",
+        )
+        super().__init__(manifest, manager)
 
 
-def test_register_wires_expected_surfaces(monkeypatch, tmp_path: Path):
-    monkeypatch.setenv("HERMES_HOME", str(tmp_path / "home"))
-    ctx = DummyCtx()
+def test_registers_commands_hooks_cli_and_skill(tmp_path: Path):
+    ctx = DummyCtx(tmp_path)
     register(ctx)
 
-    command_names = {entry["name"] for entry in ctx.commands}
-    assert "skillfactory-status" in command_names
-    assert "skillfactory-export" in command_names
-    assert "skillfactory-propose" in command_names
-    assert any(item[0] == "pre_tool_call" for item in ctx.hooks)
-    assert any(item[0] == "on_session_finalize" for item in ctx.hooks)
-    assert any(cmd["name"] == "skill-factory-v1" for cmd in ctx.cli_commands)
-    assert any(skill["name"] == "workflow-to-skill" for skill in ctx.skills)
+    plugin_commands = ctx._manager._plugin_commands
+    hook_names = set(ctx._manager._hooks.keys())
+    cli_names = set(ctx._manager._cli_commands.keys())
+    skills = ctx._manager._plugin_skills
+
+    assert {"skillfactory-status", "skillfactory-last", "skillfactory-export", "skillfactory-propose"} <= set(plugin_commands.keys())
+    assert {"pre_tool_call", "post_tool_call", "on_session_finalize", "on_session_reset"} <= hook_names
+    assert "skill-factory-v1" in cli_names
+    assert "skill_factory_v1:workflow-to-skill" in skills
+    assert skills["skill_factory_v1:workflow-to-skill"]["bare_name"] == "workflow-to-skill"

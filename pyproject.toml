@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-skill-factory-native"
+version = "0.1.0"
+description = "Hermes-native workflow capture and proposal handoff plugin"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Hermes Agent"}]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "/usr/local/lib/hermes-agent"]
+testpaths = ["tests"]
+addopts = "-q"
