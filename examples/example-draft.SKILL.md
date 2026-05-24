@@ -13,7 +13,7 @@ metadata:
 # demo-workflow-capture
 
 ## Overview
-Draft scaffold generated from `/tmp/tmp2orcozox/state/exports/demo-session-001.md`.
+Draft scaffold generated from `/tmp/tmpvvkpk5ia/state/exports/demo-session-001.md`.
 Refine this with the `skill_factory_v1:workflow-to-skill` helper skill before publishing.
 
 ## When to Use
@@ -21,7 +21,7 @@ Refine this with the `skill_factory_v1:workflow-to-skill` helper skill before pu
 - If any critical step is not evidenced in the export, mark it as verification required.
 
 ## Workflow Evidence
-- Source export: `/tmp/tmp2orcozox/state/exports/demo-session-001.md`
+- Source export: `/tmp/tmpvvkpk5ia/state/exports/demo-session-001.md`
 - Dominant observed tools: read_file, search_files, write_file
 
 ## Draft Procedure

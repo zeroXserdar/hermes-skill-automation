@@ -1,25 +1,49 @@
-# Hermes Skill Factory Native v1
+# Hermes Skill Automation
 
 > A Hermes-native workflow capture plugin that turns repeated agent sessions into exportable workflow evidence, proposal packets, and draft `SKILL.md` scaffolds.
 
+## What this is
+
+**Hermes Skill Automation** is the public-facing name of this project.
+
+It captures real Hermes workflow evidence through supported plugin hooks, preserves that evidence across sessions, and turns it into reviewable artifacts that can be refined into reusable skills.
+
+Core outputs:
+
+- deterministic workflow exports
+- agent-facing proposal packets
+- draft `SKILL.md` scaffolds
+
+## Branding and compatibility
+
+This repository is branded as **Hermes Skill Automation** everywhere user-facing.
+
+For compatibility with the current implementation, some internal identifiers still remain:
+
+- plugin id: `skill_factory_v1`
+- CLI namespace: `skill-factory-v1`
+- slash commands: `/skillfactory-*`
+- helper skill: `skill_factory_v1:workflow-to-skill`
+
+Those internal names are kept intentionally so the current plugin keeps working without a breaking migration.
+
 ## Why this repo exists
 
-The original *Skill Factory* idea is strong: when a workflow repeats, Hermes should help turn it into reusable operational knowledge instead of forcing the user to recreate it from scratch every time.
+The underlying idea is simple: repeated Hermes workflows should not disappear at the end of a session.
 
-This repo focuses on the part that is both **useful today** and **honest about current Hermes capabilities**:
+This project focuses on what is both **realistic today** and **compatible with current Hermes extension points**:
 
 - capture deterministic evidence from real Hermes plugin hooks
-- persist it across sessions
-- export a reviewable workflow summary
-- generate an agent-facing proposal packet
-- generate a draft `SKILL.md` scaffold for refinement
+- persist it locally across sessions
+- export a clean workflow summary
+- generate a proposal packet for agent refinement
+- generate a draft `SKILL.md` scaffold for publication
 
 In short: **deterministic capture first, agent-assisted polishing second**.
 
-## What makes this repo different
+## What makes this implementation credible
 
-This is not a hand-wavy prototype that assumes privileged internals or imaginary plugin APIs.
-It is grounded in extension points Hermes supports today:
+This repo is grounded in real Hermes extension points, not imagined APIs:
 
 - `plugin.yaml`
 - `__init__.py` with `register(ctx)`
@@ -28,7 +52,7 @@ It is grounded in extension points Hermes supports today:
 - CLI subcommands registered with `ctx.register_cli_command(...)`
 - plugin-provided namespaced skills registered with `ctx.register_skill(...)`
 
-That constraint is deliberate. The goal is to ship something real, inspectable, and maintainable.
+That constraint is deliberate. The point is to ship something real, inspectable, and maintainable.
 
 ## What you get
 
@@ -84,7 +108,7 @@ hermes skill-factory-v1 propose [--session-id SID] [--skill-name NAME]
 hermes skill-factory-v1 recent [--limit N]
 ```
 
-### 6) Plugin-bundled helper skill
+### 6) Helper skill
 The plugin registers a namespaced helper skill:
 
 - `skill_factory_v1:workflow-to-skill`
@@ -154,8 +178,9 @@ These are included so the output shape is easy to inspect without exposing real 
 ## Repository layout
 
 ```text
-hermes-skill-factory-native/
+hermes-skill-automation/
 ├── .gitignore
+├── ACKNOWLEDGMENTS.md
 ├── CONTRIBUTING.md
 ├── LICENSE
 ├── README.md
@@ -182,6 +207,22 @@ hermes-skill-factory-native/
     ├── test_plugin_registration.py
     └── test_state.py
 ```
+
+## Attribution
+
+This repository builds on the original idea and public base repo from:
+
+- [Romanescu11/hermes-skill-factory](https://github.com/Romanescu11/hermes-skill-factory)
+
+That repo was the conceptual and structural starting point for this work.
+
+This implementation reworked the idea into a stricter Hermes-native version centered on:
+
+- current plugin compatibility
+- deterministic hook-visible evidence
+- explicit proposal handoff instead of overstated automation
+
+See `ACKNOWLEDGMENTS.md` for the explicit credit note.
 
 ## Development
 

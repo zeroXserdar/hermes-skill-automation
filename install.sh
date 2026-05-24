@@ -10,6 +10,6 @@ rm -rf "$PLUGIN_DST"
 mkdir -p "$PLUGIN_DST"
 cp -R "$REPO_ROOT/plugin/skill_factory_v1/." "$PLUGIN_DST/"
 
-echo "Installed skill_factory_v1 plugin to: $PLUGIN_DST"
+echo "Installed Hermes Skill Automation plugin (internal id: skill_factory_v1) to: $PLUGIN_DST"
 echo "If Hermes is running, restart it so plugin discovery reloads."
 echo "Plugin-bundled helper skill installed under: $PLUGIN_DST/skills/workflow-to-skill/SKILL.md"

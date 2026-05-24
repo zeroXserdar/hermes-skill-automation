@@ -92,15 +92,15 @@ class SkillFactoryState:
     def render_status(self, session_id: Optional[str] = None) -> str:
         sid = session_id or self._latest_session_id()
         if not sid:
-            return "Skill Factory v1: no captured sessions yet."
+            return "Hermes Skill Automation: no captured sessions yet."
         events = self._load_events(sid)
         if not events:
-            return f"Skill Factory v1: no events found for session `{sid}`."
+            return f"Hermes Skill Automation: no events found for session `{sid}`."
         counts = Counter(e.get("type") for e in events)
         tools = Counter(e.get("tool_name") for e in events if str(e.get("type", "")).startswith("tool_"))
         top_tools = ", ".join(f"{name}×{count}" for name, count in tools.most_common(6)) or "none"
         return (
-            f"Skill Factory v1\n"
+            f"Hermes Skill Automation\n"
             f"- session: `{sid}`\n"
             f"- events: {len(events)}\n"
             f"- pre_tool_call: {counts.get('tool_pre', 0)}\n"
@@ -114,7 +114,7 @@ class SkillFactoryState:
     def render_last_session(self) -> str:
         entry = self._latest_index_entry()
         if not entry:
-            return "Skill Factory v1: no finalized sessions yet."
+            return "Hermes Skill Automation: no finalized sessions yet."
         return (
             f"Latest finalized session\n"
             f"- session: `{entry['session_id']}`\n"
@@ -127,9 +127,9 @@ class SkillFactoryState:
     def render_recent(self, limit: int = 5) -> str:
         index = self._load_index()
         if not index:
-            return "Skill Factory v1: no finalized sessions yet."
+            return "Hermes Skill Automation: no finalized sessions yet."
         rows = sorted(index, key=lambda x: x.get("finalized_at", ""), reverse=True)[:limit]
-        lines = ["Recent Skill Factory sessions"]
+        lines = ["Recent Hermes Skill Automation sessions"]
         for row in rows:
             lines.append(
                 f"- `{row['session_id']}` | {row.get('platform', 'unknown')} | "
@@ -140,14 +140,14 @@ class SkillFactoryState:
     def export_summary_command(self, session_id: Optional[str] = None) -> str:
         sid = session_id or self._latest_session_id()
         if not sid:
-            return "Skill Factory v1: no captured sessions to export."
+            return "Hermes Skill Automation: no captured sessions to export."
         export_path = self.export_summary(sid)
         return f"Exported workflow summary to `{export_path}`"
 
     def propose_skill_command(self, session_id: Optional[str] = None, skill_name: Optional[str] = None) -> str:
         sid = session_id or self._latest_session_id()
         if not sid:
-            return "Skill Factory v1: no captured sessions to propose from."
+            return "Hermes Skill Automation: no captured sessions to propose from."
         proposal_path, draft_path = self.propose_skill(sid, skill_name=skill_name)
         return (
             f"Created proposal packet at `{proposal_path}`\n"
@@ -164,7 +164,7 @@ class SkillFactoryState:
         last_ts = events[-1].get("ts", "")
 
         lines = [
-            f"# Skill Factory Workflow Export — {session_id}",
+            f"# Hermes Skill Automation Workflow Export — {session_id}",
             "",
             "> Generated from deterministic plugin hook capture.",
             "",
@@ -225,7 +225,7 @@ class SkillFactoryState:
         tool_tags = ", ".join(top_tools) if top_tools else "verification required"
 
         proposal_lines = [
-            f"# Skill Factory Proposal Packet — {session_id}",
+            f"# Hermes Skill Automation Proposal Packet — {session_id}",
             "",
             "## Intent",
             "This packet is meant for an LLM agent session, not as a final skill by itself.",

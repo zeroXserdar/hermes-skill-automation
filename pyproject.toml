@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hermes-skill-factory-native"
+name = "hermes-skill-automation"
 version = "0.1.0"
-description = "Hermes-native workflow capture and proposal handoff plugin"
+description = "Hermes Skill Automation: workflow capture and proposal handoff plugin"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}

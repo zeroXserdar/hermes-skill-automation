@@ -1,6 +1,6 @@
 ---
 name: workflow-to-skill
-description: Use when you have a Skill Factory workflow export and want to convert it into a polished reusable Hermes skill.
+description: Use when you have a Hermes Skill Automation workflow export and want to convert it into a polished reusable Hermes skill.
 version: 1.0.0
 author: Hermes Agent
 license: MIT
@@ -14,7 +14,7 @@ metadata:
 
 ## Overview
 
-Use this skill after Skill Factory v1 exports a deterministic workflow summary from a real Hermes session. The export is evidence, not the final skill. Your job is to turn that evidence into a clean, reusable `SKILL.md` that captures triggers, ordered steps, pitfalls, and verification checks.
+Use this skill after Hermes Skill Automation exports a deterministic workflow summary from a real Hermes session. The export is evidence, not the final skill. Your job is to turn that evidence into a clean, reusable `SKILL.md` that captures triggers, ordered steps, pitfalls, and verification checks.
 
 The core rule: **do not pretend the export contains more than it does**. If a step or rationale is missing, mark it explicitly as needing confirmation or infer only the minimum necessary to make the skill usable.
 

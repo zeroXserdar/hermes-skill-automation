@@ -1,7 +1,7 @@
 name: skill_factory_v1
 version: 0.1.0
-summary: Hermes-native workflow capture and skill handoff plugin.
-description: "Captures workflow evidence from Hermes sessions, persists it, and exposes slash commands + CLI utilities to export repeatable workflows into reusable skill drafts."
+summary: Hermes Skill Automation workflow capture and skill handoff plugin.
+description: "Hermes Skill Automation captures workflow evidence from Hermes sessions, persists it, and exposes slash commands plus CLI utilities to export repeatable workflows into reusable skill drafts."
 author: Hermes Agent
 kind: standalone
 platforms:

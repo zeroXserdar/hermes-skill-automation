@@ -33,13 +33,13 @@ def register(ctx) -> None:
     ctx.register_command(
         name="skillfactory-status",
         handler=lambda raw_args="": state.render_status(raw_args.strip() or None),
-        description="Show Skill Factory capture status for the active or latest session.",
+        description="Show Hermes Skill Automation capture status for the active or latest session.",
         args_hint="[session_id]",
     )
     ctx.register_command(
         name="skillfactory-last",
         handler=lambda raw_args="": state.render_last_session(),
-        description="Show the latest finalized session known to Skill Factory.",
+        description="Show the latest finalized session known to Hermes Skill Automation.",
     )
     ctx.register_command(
         name="skillfactory-export",
@@ -56,7 +56,7 @@ def register(ctx) -> None:
 
     ctx.register_cli_command(
         name="skill-factory-v1",
-        help="Inspect and export Skill Factory workflow captures",
+        help="Inspect and export Hermes Skill Automation workflow captures",
         setup_fn=register_cli,
         handler_fn=skill_factory_v1_command,
         description="Hermes-native workflow capture exporter for turning repeated sessions into reusable skills.",
@@ -82,4 +82,4 @@ def skill_factory_v1_command(args: argparse.Namespace) -> None:
     elif action == "recent":
         recent_command(state, args)
     else:
-        raise SystemExit("Unknown skill-factory-v1 action")
+        raise SystemExit("Unknown Hermes Skill Automation action")

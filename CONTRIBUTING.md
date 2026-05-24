@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for considering improvements to **Hermes Skill Factory Native v1**.
+Thanks for considering improvements to **Hermes Skill Automation**.
 
 ## Project intent
 This repo is intentionally narrow in scope:
